@@ -187,7 +187,8 @@
     </aside>
     <div class="p-4 sm:ml-64 bg-gray-50 dark:bg-gray-900 mt-14 w-full sm:w-[calc(100%-16rem)] ">
         <!-- breadcrumb -->
-        <nav class="flex m-2" aria-label="Breadcrumb">
+        <div class="grid grid-cols-4">
+        <nav class="flex m-2 col-span-3" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
             <li class="inline-flex items-center">
                 <a href="index.html" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-800 dark:hover:text-white">
@@ -207,6 +208,23 @@
             </li>
             </ol>
         </nav>
+        <div class="grid grid-cols-2">
+            <div>
+            <p class="text-gray-800 dark:text-white mt-4 ml-20">Auto Refresh: 
+            </p>
+        </div>
+        <div>
+            <select id="" class="bg-gray-50 border w-1/2 m-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>5 minutes</option>
+                <option value="US">30 second</option>
+                <option value="US">1 minutes</option>
+                <option value="CA">10 minutes</option>
+                <option value="FR">30 minutes</option>
+                <option value="DE">60 minutes</option>
+            </select>
+        </div>
+        </div>
+        </div>
         <!-- end breadcrumb -->
         <!-- content -->
         <div class="min-h-96">
