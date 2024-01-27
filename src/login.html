@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="/src/css/styles.css">
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+<body>
+    <div class="w-screen h-screen bg-white dark:bg-gray-800">
+        <div class="p-4 w-full md:w-1/2 mx-auto">
+            <div class="my-4">
+                <img class="img-height mx-auto" src="/src/img/satkomindo-logo.png.png" alt="logo satkom" srcset="">
+            </div>
+        </div>
+        <h1 class="text-center font-bold text-4xl text-gray-900 dark:text-white mb-8">
+            TPG MONITORING CENTER
+        </h1>
+        <div class="w-full md:w-1/2 mx-auto max-w-screen-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <form class="space-y-6" action="#">
+                <h5 class="text-xl font-medium text-gray-900 dark:text-white">Sign in to TMC</h5>
+                <div>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                    <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="blabla@satkomindo.com" required>
+                </div>
+                <div>
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                    <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                </div>
+                <div class="flex items-start">
+                    <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                            <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required>
+                        </div>
+                        <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+                    </div>
+                    <a href="#" class="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
+                </div>
+                
+                    <button onclick="window.location.href='index.html';"  type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
+                
+            </form>
+        </div>
+        <!-- footer -->
+        <footer class="bg-white rounded-lg shadow dark:bg-gray-800 mt-40">
+            <div class="w-full h-24 mx-auto max-w-screen-xl p-4">
+            <p class="text-sm text-gray-500 sm:text-center text-left dark:text-gray-400"> <a href="mailto: eng_tpg@satkomindo.com" class="hover:underline">Engineer TPG</a>© 2024 <br>
+            </p>
+            <p class="text-sm text-gray-500 sm:text-center text-left dark:text-gray-400">DC GTI Ragunan Lt.3 Kordinat M61
+            </p>
+            <p class="text-sm text-gray-500 sm:text-center text-left dark:text-gray-400">DRC Tabanan Kordinat P6
+            </p>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- script penunjang -->
+    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="/node_modules/flowbite/dist/datepicker.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="/src/js/darktoggle.js"></script>
+    <script src="/src/js/graffik.js"></script>
+</body>
+</html>
