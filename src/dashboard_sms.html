@@ -1,0 +1,418 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/output.css" rel="stylesheet">
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+    <title>TMC Satkomindo</title>
+</head>
+<body>
+    <div w3-include-html="nav.html">
+    </div>
+    <div class="relative w-full">
+        <div class="fixed top-7 sm:top-3  right-20 h-16 w-16 z-50">
+            <button id="theme-toggle" type="button" class="text-gray-900 dark:text-gray-800 hover:bg-blue-400 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clip-rule="evenodd" />
+                </svg>
+                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#fff" d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z" /></path>
+                
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="p-4 sm:ml-64 min-h-screen bg-blue-200 dark:bg-gray-900 mt-14 w-full sm:w-[calc(100%-16rem)] ">
+        <!-- breadcrumb -->
+        <div class="grid grid-cols-2 sm:grid-cols-4">
+        <nav class="flex m-2 col-span-1 sm:col-span-2 lg:col-span-3" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+            <li class="inline-flex items-center">
+                <a href="index.html" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-800 dark:hover:text-white">
+                <p class="text-gray-800 dark:text-white">Home</p>
+                </a>
+            </li>
+            <li aria-current="page">
+                <div class="flex items-center">
+                <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                </svg>
+                <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                    <p class="text-gray-800 dark:text-white">Traffic SMS
+                    </p>
+                    </span>
+                </div>
+            </li>
+            </ol>
+        </nav>
+        <div class="grid grid-cols-2">
+            <div>
+            <p class="text-gray-800 dark:text-white mt-4">Auto Refresh: 
+            </p>
+        </div>
+        <div>
+            <select id="" class="bg-gray-50 border w-1/2 m-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>5 minutes</option>
+                <option value="US">30 second</option>
+                <option value="US">1 minutes</option>
+                <option value="CA">10 minutes</option>
+                <option value="FR">30 minutes</option>
+                <option value="DE">60 minutes</option>
+            </select>
+        </div>
+        </div>
+        </div>
+        <!-- end breadcrumb -->
+        <!-- content -->
+        <div class="min-h-96">
+            <div class="grid grid-cols-2 gap-4 lg:grid-cols-3">
+                <div class=" w-full col-span-2 rounded-lg border overflow-hidden bg-blue-300 dark:bg-gray-800">
+                    <h2 class="text-xl pb-0 text-gray-800 dark:text-white px-2 sm:text-2xl">Total Traffic SMS For Today </h2>
+                    <h1 class="text-4xl py-0 font-bold text-right text-gray-800 dark:text-white px-2 sm:text-4xl">5.222.333</h1>
+                    <h2 class="pt-0 text-xs text-gray-800 dark:text-white px-2 sm:text-sm">Update every 1 hour </h2>
+                    <div class="grid grid-cols-2 gap-2 p-2">
+                        <div class="border rounded-lg col-span-2">
+                            <h2 class="text-l text-gray-800 dark:text-white px-2 sm:text-xl pb-0">MDM </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800 dark:text-white p-2 sm:text-2xl pt-0 truncate">2.222.333</h1>
+                            <hr>
+                            <div class="grid grid-cols-2">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg">
+                            <h2 class="text-l text-gray-800 dark:text-white px-2 sm:text-xl pb-0">GNX1 </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800 dark:text-white px-2 sm:text-2xl pt-0 truncate">2.222.333</h1>
+                            <hr>
+                            <div class="grid grid-cols-2">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg">
+                            <h2 class="text-l text-gray-800 dark:text-white px-2 sm:text-xl pb-0">LBC </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800 dark:text-white px-2 sm:text-2xl pt-0 truncate">2.222.333</h1>
+                            <hr>
+                            <div class="grid grid-cols-2">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="graffik_sms.html" class=" text-blue-600 hover:underline">
+                    <p class="p-2">See Graffik</p>
+                    </a>
+                </div>
+                <div class="w-full rounded-lg border overflow-hidden bg-blue-300 dark:bg-gray-800">
+                    <h2 class="text-xl pb-0 text-gray-800 dark:text-white px-2 sm:text-2xl ">Succes SMS</h2>
+                    <h1 class="text-4xl py-0 font-bold text-right text-gray-800 dark:text-white px-2 sm:text-4xl truncate">2.222.333</h1>
+                    <h2 class="text-xs pt-0 text-gray-800 dark:text-white px-2 sm:text-sm">Last 5 minutes</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 p-2">
+                        <div class="border rounded-lg col-span-2 md:col-span-1">
+                            <h2 class="text-l text-gray-800 dark:text-white px-2 sm:text-xl pb-0 ">MDM </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800 dark:text-white px-2 sm:text-2xl pt-0 truncate">222.333</h1>
+                            <hr>                            
+                            <div class="grid grid-cols-1">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg">
+                            <h2 class="text-l text-gray-800 dark:text-white px-2 sm:text-xl pb-0">GNX1 </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800 dark:text-white px-2 sm:text-2xl pt-0 truncate">222.333</h1>
+                            <hr>                            
+                            <div class="grid grid-cols-1">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg">
+                            <h2 class="text-l text-gray-800 dark:text-white px-2 sm:text-xl pb-0">LBC </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800 dark:text-white px-2 sm:text-2xl pt-0 truncate">222.333</h1>
+                            <hr>                            
+                            <div class="grid grid-cols-1">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center dark:text-white px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full rounded-lg border overflow-hidden bg-red-500">
+                    <h2 class="text-xl pb-0 text-gray-800  px-2 sm:text-2xl ">Pending SMS</h2>
+                    <h1 class="text-4xl py-0 font-bold text-right text-gray-800  px-2 sm:text-4xl truncate">22.333</h1>
+                    <h2 class="text-xs pt-0 dark:text-gray-800 px-2 sm:text-sm">Last 5 minutes</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 p-2">
+                        <div class="border rounded-lg col-span-2 md:col-span-1">
+                            <h2 class="text-l text-gray-800  px-2 sm:text-xl pb-0 ">MDM </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800  px-2 sm:text-2xl pt-0 truncate">2.333</h1>
+                            <hr>                            
+                            <div class="grid grid-cols-1">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg">
+                            <h2 class="text-l text-gray-800  px-2 sm:text-xl pb-0">GNX1 </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800  px-2 sm:text-2xl pt-0 truncate">222.333</h1>
+                            <hr>                            
+                            <div class="grid grid-cols-1">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg">
+                            <h2 class="text-l text-gray-800  px-2 sm:text-xl pb-0">LBC </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800  px-2 sm:text-2xl pt-0 truncate">222.333</h1>
+                            <hr>                            
+                            <div class="grid grid-cols-1">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full rounded-lg border overflow-hidden bg-red-500">
+                    <h2 class="text-xl pb-0 text-gray-800  px-2 sm:text-2xl ">Failed SMS</h2>
+                    <h1 class="text-4xl py-0 font-bold text-right text-gray-800  px-2 sm:text-4xl truncate">22.333</h1>
+                    <h2 class="text-xs pt-0 dark:text-gray-800 px-2 sm:text-sm">Last 5 minutes</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 p-2">
+                        <div class="border rounded-lg col-span-2 md:col-span-1">
+                            <h2 class="text-l text-gray-800  px-2 sm:text-xl pb-0 ">MDM </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800  px-2 sm:text-2xl pt-0 truncate">2.333</h1>
+                            <hr>                            
+                            <div class="grid grid-cols-1">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg">
+                            <h2 class="text-l text-gray-800  px-2 sm:text-xl pb-0">GNX1 </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800  px-2 sm:text-2xl pt-0 truncate">222.333</h1>
+                            <hr>                            
+                            <div class="grid grid-cols-1">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg">
+                            <h2 class="text-l text-gray-800  px-2 sm:text-xl pb-0">LBC </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800  px-2 sm:text-2xl pt-0 truncate">222.333</h1>
+                            <hr>                            
+                            <div class="grid grid-cols-1">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="w-full rounded-lg border overflow-hidden bg-red-500">
+                    <h2 class="text-xl pb-0 text-gray-800  px-2 sm:text-2xl ">Rejected SMS</h2>
+                    <h1 class="text-4xl py-0 font-bold text-right text-gray-800  px-2 sm:text-4xl truncate">22.333</h1>
+                    <h2 class="text-xs pt-0 dark:text-gray-800 px-2 sm:text-sm">Last 5 minutes</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 p-2">
+                        <div class="border rounded-lg col-span-2 md:col-span-1">
+                            <h2 class="text-l text-gray-800  px-2 sm:text-xl pb-0 ">MDM </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800  px-2 sm:text-2xl pt-0 truncate">2.333</h1>
+                            <hr>                            
+                            <div class="grid grid-cols-1">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg">
+                            <h2 class="text-l text-gray-800  px-2 sm:text-xl pb-0">GNX1 </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800  px-2 sm:text-2xl pt-0 truncate">222.333</h1>
+                            <hr>                            
+                            <div class="grid grid-cols-1">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg">
+                            <h2 class="text-l text-gray-800  px-2 sm:text-xl pb-0">LBC </h2>
+                            <h1 class="text-xl font-bold text-right text-gray-800  px-2 sm:text-2xl pt-0 truncate">222.333</h1>
+                            <hr>                            
+                            <div class="grid grid-cols-1">
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">TSEL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">ISAT: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">XL: 2111 </h2>
+                                </div>
+                                <div>
+                                    <h2 class="text-l text-gray-800 text-center  px-2 sm:text-xl pb-0">Other: 2111 </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </div>
+        <!-- footer -->
+        <div w3-include-html="footer.html"></div>
+    </div>
+        
+        
+    <!-- script penunjang -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+    <script src="./js/darktoggle.js"></script>
+    <script src="./js/graffik.js"></script>
+    <script src="./js/include.js"></script>
+    <script>
+        includeHTML();
+    </script>
+</body>
+</html>

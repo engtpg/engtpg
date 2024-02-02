@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "apexcharts": "^3.45.2",
+    "flowbite": "^2.2.1"
+  }
+}
